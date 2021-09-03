@@ -54,38 +54,43 @@ class EventEmitter {
 }
 
 
+// Tests
 
-// const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-// function c1() {
-// 	console.log('Hello!');
-// }
+function c1() {
+	console.log('Hello!');
+}
 
-// function c2() {
-// 	console.log('Hola!');
-// }
-
-
-// function c3() {
-// 	console.log('Just once!');
-// }
-
-// ee.on('test-event1', c1);
-// ee.on('test-event2', c2);
-// ee.emit('test-event1');
-// ee.emit('test-event2');
-// ee.off('test-event2', c2);
-// ee.emit('test-event1');
-// ee.emit('test-event2');
+function c2() {
+	console.log('Hola!');
+}
 
 
+function c3() {
+	console.log('Just once!');
+}
 
-// ee.once('once', c3);
+ee.on('test-event1', c1);
+ee.on('test-event2', c2);
+
+// Should log c1 and c2: 'Hello' and 'Hola'
+ee.emit('test-event1');
+ee.emit('test-event2');
 
 
-// ee.emit('once');
-// ee.emit('once');
-// ee.emit('once');
+ee.off('test-event2', c2);
+
+// Should log c1 but not c2: 'Hello'
+ee.emit('test-event1');
+ee.emit('test-event2');
+
+ee.once('once', c3);
+
+// Should only log 'once' one time
+ee.emit('once');
+ee.emit('once');
+ee.emit('once');
 
 
 
